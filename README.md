@@ -2,7 +2,7 @@
 
 ## 📌 Introduction
 
-The **Not my personal project** project is an automated tool designed to scrape data from Facebook using Selenium. This tool is capable of extracting posts, comments, images, and videos from specific Facebook pages.
+The **Facebook Data Crawler** project is an automated tool designed to scrape data from Facebook using Selenium. This tool is capable of extracting posts, comments, images, and videos from specific Facebook pages.
 
 ## 🚀 Features
 
@@ -57,10 +57,11 @@ Crawl-Facebook-Data/
 │── crawl.py              # Main script for data extraction
 │── save_cookies.py       # Script for storing cookies
 │── requirements.txt      # Required dependencies
+│── utils.py              # Helper functions for data extraction
 │── README.md             # Documentation file
 ```
 
-## 🔄 Differences Between `crawl.py` and `crawl1.py`(the old one)
+## 🔄 Differences Between `crawl.py` and `crawl1.py`
 
 ### 1. **Fetching Post Links**
 
@@ -86,6 +87,38 @@ Crawl-Facebook-Data/
 
 - `crawl.py` utilizes `os.makedirs(..., exist_ok=True)`, an optimized method for directory creation.
 - `crawl1.py` manually checks and creates directories using `if not os.path.exists(folder)`, which is less efficient.
+
+## 🔄 Differences Between `utils.py` and `utils(old).py`
+
+### 1. **Improved Comment Extraction**
+
+- `utils.py` supports multiple comment formats, including Reels and videos.
+- `utils(old).py` uses a single XPath selector and does not account for different post types.
+
+### 2. **Enhanced Caption Handling**
+
+- `utils.py` implements fallback XPath selectors for different post formats.
+- `utils(old).py` only extracts captions from standard posts.
+
+### 3. **Better Video Extraction**
+
+- `utils.py` extracts URLs from **standard videos, Reels, source elements, data attributes, and iframes**.
+- `utils(old).py` only extracts video URLs from basic class selectors.
+
+### 4. **More Efficient Post Link Retrieval**
+
+- `utils.py` stores **post, video, and Reels URLs separately** in sets to avoid duplicates.
+- `utils(old).py` stores URLs in a single list without separation.
+
+### 5. **New Functionality for Hashtags**
+
+- `utils.py` introduces `get_captions_and_hashtags()`, which separates hashtags from captions.
+- `utils(old).py` does not support hashtag extraction.
+
+### 6. **Selective Video Downloading**
+
+- `utils.py` allows excluding Reels when downloading videos.
+- `utils(old).py` downloads all videos without filtering.
 
 ## ⚠️ Important Notes
 
